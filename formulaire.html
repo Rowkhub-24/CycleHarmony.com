@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Enquête CycleHarmony - Google Forms</title>
+    <style>
+        :root {
+            --primary-color: #673ab7;
+            --secondary-color: #f5f5f5;
+            --accent-color: #4285f4;
+            --text-color: #202124;
+            --error-color: #d93025;
+            --success-color: #0f9d58;
+        }
+        
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Roboto', Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f8f9fa;
+            color: var(--text-color);
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            padding: 30px;
+        }
+        
+        .header {
+            border-bottom: 1px solid #dadce0;
+            padding-bottom: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .title {
+            font-size: 32px;
+            font-weight: 400;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .description {
+            font-size: 16px;
+            color: #5f6368;
+            margin-bottom: 16px;
+        }
+        
+        .required-message {
+            font-size: 14px;
+            color: var(--error-color);
+            margin-top: 10px;
+        }
+        
+        .section {
+            margin-bottom: 32px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid #dadce0;
+        }
+        
+        .section-title {
+            font-size: 18px;
+            font-weight: 500;
+            margin-bottom: 16px;
+            color: var(--primary-color);
+        }
+        
+        .question {
+            margin-bottom: 24px;
+        }
+        
+        .question-text {
+            font-size: 16px;
+            font-weight: 500;
+            margin-bottom: 8px;
+            display: flex;
+        }
+        
+        .required {
+            color: var(--error-color);
+            margin-left: 4px;
+        }
+        
+        .options {
+            margin-top: 8px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 8px;
+        }
+        
+        input[type="radio"], input[type="checkbox"] {
+            margin-right: 10px;
+        }
+        
+        input[type="text"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #dadce0;
+            border-radius: 4px;
+            font-size: 14px;
+            margin-top: 8px;
+        }
+        
+        textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+        
+        .scale {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        
+        .scale-option {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin: 0 5px;
+        }
+        
+        .buttons {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 24px;
+        }
+        
+        button {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #5e35b1;
+        }
+        
+        button.prev {
+            background-color: #f1f3f4;
+            color: var(--text-color);
+        }
+        
+        button.prev:hover {
+            background-color: #e8eaed;
+        }
+        
+        .progress-bar {
+            height: 10px;
+            background-color: #f1f3f4;
+            border-radius: 5px;
+            margin-bottom: 30px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background-color: var(--primary-color);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        
+        .thank-you {
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .thank-you h2 {
+            color: var(--primary-color);
+            margin-bottom: 16px;
+        }
+        
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .title {
+                font-size: 24px;
+            }
+            
+            .scale {
+                flex-wrap: wrap;
+            }
+            
+            .scale-option {
+                margin-bottom: 10px;
+                flex: 0 0 33.333%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+        
+        <form id="survey-form">
+            <!-- Page 1: Introduction -->
+            <div class="page" id="page-1">
+                <div class="header">
+                <h1 class="title">Enquête CycleHarmony</h1>
+                <!-- Exemple de formulaire HTML connecté à traitement.php -->
+                <form action="traitement.php" method="POST">
+                    <label for="nom">Nom :</label>
+                    <input type="text" id="nom" name="nom" required><br>
+                    <label for="email">Email :</label>
+                    <input type="email" id="email" name="email" required><br>
+                    <label for="message">Message :</label>
+                    <textarea id="message" name="message" required></textarea><br>
+                    <button type="submit">Envoyer</button>
+                </form>
+                    <p class="description">Merci de participer à notre enquête sur la maîtrise du cycle menstruel. Vos réponses nous aideront à créer une plateforme qui répond parfaitement à vos besoins.</p>
+                    <p class="description">Cette enquête est anonyme et vos données seront strictement confidentielles.</p>
+                    <p class="required-message">* Indique une question obligatoire</p>
+                </div>
+                
+                <div class="section">
+                    <h2 class="section-title">Informations générales</h2>
+                    
+                    <div class="question">
+                        <p class="question-text">Quel est votre groupe d'âge ? <span class="required">*</span></p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="age" value="moins-18" required>
+                                Moins de 18 ans
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="age" value="18-24">
+                                18-24 ans
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="age" value="25-34">
+                                25-34 ans
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="age" value="35-44">
+                                35-44 ans
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="age" value="45-plus">
+                                45 ans et plus
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p class="question-text">Utilisez-vous actuellement une application ou une méthode (agenda, calendrier) pour suivre votre cycle menstruel ? <span class="required">*</span></p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="tracking-method" value="app-mobile" required>
+                                Oui, une application mobile
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="tracking-method" value="calendrier-papier">
+                                Oui, un calendrier/agenda papier
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="tracking-method" value="mental">
+                                Oui, je le note mentalement
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="tracking-method" value="none">
+                                Non, je ne le suis pas du tout
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question" id="app-details" style="display: none;">
+                        <p class="question-text">Si OUI, laquelle utilisez-vous et qu'est-ce que vous aimez ou n'aimez pas chez elle ?</p>
+                        <textarea name="app-details"></textarea>
+                    </div>
+                    
+                    <div class="question" id="no-tracking-reason" style="display: none;">
+                        <p class="question-text">Si NON, quelle est la principale raison pour laquelle vous ne le suivez pas ?</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="radio" name="no-tracking-reason" value="not-necessary">
+                                Cela ne me semble pas nécessaire
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="no-tracking-reason" value="no-tool">
+                                Je n'ai pas trouvé d'outil simple et efficace
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="no-tracking-reason" value="privacy">
+                                Je suis préoccupée par la confidentialité de mes données
+                            </label>
+                            <label class="option">
+                                <input type="radio" name="no-tracking-reason" value="other">
+                                Autre
+                            </label>
+                            <input type="text" name="no-tracking-other" placeholder="Précisez" style="margin-top: 8px; display: none;">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <div></div> <!-- Empty div for spacing -->
+                    <button type="button" class="next" onclick="showPage(2)">Suivant</button>
+                </div>
+            </div>
+            
+            <!-- Page 2: Besoins et frustrations -->
+            <div class="page" id="page-2" style="display: none;">
+                <div class="header">
+                    <h1 class="title">Besoins et frustrations</h1>
+                </div>
+                
+                <div class="section">
+                    <div class="question">
+                        <p class="question-text">Pour quelles raisons principales souhaiteriez-vous mieux suivre votre cycle ? (Plusieurs réponses possibles) <span class="required">*</span></p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="predict-period">
+                                Prévoir la date de mes prochaines règles
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="understand-symptoms">
+                                Comprendre mes symptômes (SPM, douleurs, migraines...)
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="mood-energy">
+                                Suivre mon humeur et mon énergie
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="ovulation">
+                                Identifier ma période d'ovulation (pour concevoir un enfant ou pour la contraception naturelle)
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="self-knowledge">
+                                Mieux me connaître globalement
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="planning">
+                                Préparer des entretiens ou événements importants en fonction de mon cycle
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="tracking-reasons" value="other">
+                                Autre
+                            </label>
+                            <input type="text" name="tracking-reasons-other" placeholder="Précisez" style="margin-top: 8px; display: none;">
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p class="question-text">Quels sont les plus grands défis ou frustrations que vous rencontrez actuellement dans la gestion de votre cycle ?</p>
+                        <textarea name="challenges"></textarea>
+                    </div>
+                    
+                    <div class="question">
+                        <p class="question-text">Sur une échelle de 1 (pas du tout confiante) à 5 (très confiante), à quel point vous sentez-vous informée et en maîtrise concernant votre corps et votre cycle menstruel ? <span class="required">*</span></p>
+                        <div class="scale">
+                            <label class="scale-option">
+                                <input type="radio" name="confidence-level" value="1" required>
+                                <span>1</span>
+                            </label>
+                            <label class="scale-option">
+                                <input type="radio" name="confidence-level" value="2">
+                                <span>2</span>
+                            </label>
+                            <label class="scale-option">
+                                <input type="radio" name="confidence-level" value="3">
+                                <span>3</span>
+                            </label>
+                            <label class="scale-option">
+                                <input type="radio" name="confidence-level" value="4">
+                                <span>4</span>
+                            </label>
+                            <label class="scale-option">
+                                <input type="radio" name="confidence-level" value="5">
+                                <span>5</span>
+                            </label>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; margin-top: 5px;">
+                            <span>Pas du tout confiante</span>
+                            <span>Très confiante</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button type="button" class="prev" onclick="showPage(1)">Précédent</button>
+                    <button type="button" class="next" onclick="showPage(3)">Suivant</button>
+                </div>
+            </div>
+            
+            <!-- Page 3: Attentes pour la plateforme -->
+            <div class="page" id="page-3" style="display: none;">
+                <div class="header">
+                    <h1 class="title">Attentes pour la plateforme</h1>
+                </div>
+                
+                <div class="section">
+                    <div class="question">
+                        <p class="question-text">Quelles fonctionnalités seraient les PLUS importantes pour vous sur une telle plateforme ? (Classez par ordre d'importance de 1 (le plus important) à 5)</p>
+                        <div class="options">
+                            <div style="margin-bottom: 10px;">
+                                <label>Calendrier de suivi simple et visuel</label>
+                                <select name="feature-calendar">
+                                    <option value="">Sélectionnez un rang</option>
+                                    <option value="1">1 - Le plus important</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 - Le moins important</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label>Alertes et notifications personnalisables</label>
+                                <select name="feature-alerts">
+                                    <option value="">Sélectionnez un rang</option>
+                                    <option value="1">1 - Le plus important</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 - Le moins important</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label>Articles et contenus éducatifs fiables</label>
+                                <select name="feature-articles">
+                                    <option value="">Sélectionnez un rang</option>
+                                    <option value="1">1 - Le plus important</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 - Le moins important</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label>Journal pour noter les symptômes, l'humeur, l'énergie</label>
+                                <select name="feature-journal">
+                                    <option value="">Sélectionnez un rang</option>
+                                    <option value="1">1 - Le plus important</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 - Le moins important</option>
+                                </select>
+                            </div>
+                            <div style="margin-bottom: 10px;">
+                                <label>Statistiques et analyses personnalisées</label>
+                                <select name="feature-stats">
+                                    <option value="">Sélectionnez un rang</option>
+                                    <option value="1">1 - Le plus important</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5 - Le moins important</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p class="question-text">Quel type de contenu éducatif aimeriez-vous y trouver ? (Plusieurs réponses possibles)</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="checkbox" name="content-type" value="hormonal-health">
+                                Articles sur la santé hormonale
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="content-type" value="pain-management">
+                                Conseils pour gérer les douleurs (règles douloureuses, SPM)
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="content-type" value="fertility">
+                                Informations sur la fertilité et la conception
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="content-type" value="nutrition">
+                                Conseils nutritionnels et d'exercice en phase avec le cycle
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="content-type" value="testimonials">
+                                Témoignages et expériences d'autres femmes
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="content-type" value="webinars">
+                                Webinaires ou vidéos avec des expert(e)s
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p class="question-text">Quels sont vos critères les plus importants concernant la plateforme elle-même ? (Plusieurs réponses possibles)</p>
+                        <div class="options">
+                            <label class="option">
+                                <input type="checkbox" name="platform-criteria" value="usability">
+                                La simplicité d'utilisation et le design
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="platform-criteria" value="privacy">
+                                La confidentialité et la sécurité absolue de mes données
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="platform-criteria" value="free">
+                                La gratuité de l'offre de base
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="platform-criteria" value="credibility">
+                                La crédibilité scientifique des informations
+                            </label>
+                            <label class="option">
+                                <input type="checkbox" name="platform-criteria" value="empowerment">
+                                Le côté inspirant et responsabilisant
+                            </label>
+                        </div>
+                    </div>
+                    
+                    <div class="question">
+                        <p class="question-text">Avez-vous d'autres commentaires, idées ou fonctionnalités que vous aimeriez suggérer pour cette plateforme ?</p>
+                        <textarea name="suggestions"></textarea>
+                    </div>
+                </div>
+                
+                <div class="buttons">
+                    <button type="button" class="prev" onclick="showPage(2)">Précédent</button>
+                    <button type="submit" class="next">Soumettre</button>
+                </div>
+            </div>
+            
+            <!-- Thank you page (initially hidden) -->
+            <div class="page" id="thank-you" style="display: none;">
+                <div class="thank-you">
+                    <h2>Merci pour votre participation !</h2>
+                    <p>Vos réponses nous sont précieuses pour créer une plateforme qui répondra au mieux à vos besoins.</p>
+                    <p>L'équipe CycleHarmony</p>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        // Show/hide questions based on previous answers
+        document.querySelectorAll('input[name="tracking-method"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const appDetails = document.getElementById('app-details');
+                const noTrackingReason = document.getElementById('no-tracking-reason');
+                
+                if (this.value === 'none') {
+                    appDetails.style.display = 'none';
+                    noTrackingReason.style.display = 'block';
+                } else if (this.value !== 'none') {
+                    appDetails.style.display = 'block';
+                    noTrackingReason.style.display = 'none';
+                } else {
+                    appDetails.style.display = 'none';
+                    noTrackingReason.style.display = 'none';
+                }
+            });
+        });
+        
+        // Show other text input when "other" is selected
+        document.querySelectorAll('input[name="no-tracking-reason"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const otherInput = document.querySelector('input[name="no-tracking-other"]');
+                otherInput.style.display = this.value === 'other' ? 'block' : 'none';
+            });
+        });
+        
+        // Show other text input for tracking reasons
+        document.querySelectorAll('input[name="tracking-reasons"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const otherInput = document.querySelector('input[name="tracking-reasons-other"]');
+                if (this.value === 'other') {
+                    otherInput.style.display = this.checked ? 'block' : 'none';
+                }
+            });
+        });
+        
+        // Page navigation
+        let currentPage = 1;
+        const totalPages = 3;
+        
+        function showPage(pageNumber) {
+            // Validate current page before proceeding
+            if (pageNumber > currentPage && !validatePage(currentPage)) {
+                alert('Veuillez répondre aux questions obligatoires avant de continuer.');
+                return;
+            }
+            
+            document.getElementById(`page-${currentPage}`).style.display = 'none';
+            document.getElementById(`page-${pageNumber}`).style.display = 'block';
+            currentPage = pageNumber;
+            
+            // Update progress bar
+            const progressPercentage = ((pageNumber - 1) / totalPages) * 100;
+            document.getElementById('progress').style.width = `${progressPercentage}%`;
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        }
+        
+        function validatePage(pageNumber) {
+            if (pageNumber === 1) {
+                const ageSelected = document.querySelector('input[name="age"]:checked');
+                const methodSelected = document.querySelector('input[name="tracking-method"]:checked');
+                
+                if (!ageSelected || !methodSelected) {
+                    return false;
+                }
+            } else if (pageNumber === 2) {
+                const reasonsSelected = document.querySelector('input[name="tracking-reasons"]:checked');
+                const confidenceSelected = document.querySelector('input[name="confidence-level"]:checked');
+                
+                if (!reasonsSelected || !confidenceSelected) {
+                    return false;
+                }
+            }
+            return true;
+        }
+        
+        // Form submission
+        document.getElementById('survey-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // In a real scenario, you would send the data to your server here
+            // For this example, we'll just show the thank you message
+            
+            document.getElementById(`page-${currentPage}`).style.display = 'none';
+            document.getElementById('thank-you').style.display = 'block';
+            document.getElementById('progress').style.width = '100%';
+            
+            // You could collect all form data like this:
+            const formData = new FormData(this);
+            console.log('Form data:', Object.fromEntries(formData));
+            
+            // In a real implementation, you would send this data to your server
+            // fetch('/submit-survey', { method: 'POST', body: formData });
+        });
+    </script>
+</body>
+</html>
